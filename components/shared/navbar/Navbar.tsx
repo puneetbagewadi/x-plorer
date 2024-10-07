@@ -1,31 +1,34 @@
-"use client";
+"use client"
 
-import Link from "next/link";
-import React from "react";
-import Theme from "./Theme";
-import { navLinks } from "@/constants";
-import { usePathname } from "next/navigation";
-import MobileNav from "./MobileNav";
+import Link from "next/link"
+import React from "react"
+import Theme from "./Theme"
+import { navLinks } from "@/constants"
+import { usePathname } from "next/navigation"
+import MobileNav from "./MobileNav"
+import NetworkSelector from "../NetworkSelector"
+import { ConnectKitButton } from "connectkit"
 
 const Navbar = () => {
-  const pathname = usePathname();
+  const pathname = usePathname()
 
   return (
-    <header className="background-light900_dark900 fixed  z-50 w-full  py-6">
-      <nav className="flex-between flex w-full gap-5 px-4 dark:shadow-none  xl:px-20">
-        <Link href={"/"} className="">
-          <div className="flex flex-col gap-1">
-            <p className=" text-2xl font-bold leading-[22px]  text-light-text-950 transition-all duration-300 dark:text-dark-text-950">
-              Test App
+    <header className="sticky top-0 z-10 w-full bg-neutral-100 py-6">
+      <nav className="flex-between flex w-full gap-5 px-4 dark:shadow-none xl:px-20">
+        <div className="flex items-center gap-4">
+          <Link href={"/"} className="">
+            <p className=" text-2xl font-bold leading-[22px] text-black transition-all duration-300">
+              Manta Pacific Explorer
             </p>
-          </div>
-        </Link>
+          </Link>
+          <NetworkSelector />
+        </div>
         <div className="flex-between gap-5">
           <div className="hidden flex-1 flex-row gap-6 p-2 transition-all duration-300 md:flex lg:gap-12">
             {navLinks.map((item) => {
               const isActive =
                 (pathname.includes(item.route) && item.route.length > 1) ||
-                pathname === item.route;
+                pathname === item.route
               return (
                 <Link
                   className={`${
@@ -38,8 +41,11 @@ const Navbar = () => {
                 >
                   {item.label}
                 </Link>
-              );
+              )
             })}
+          </div>
+          <div className="">
+            <ConnectKitButton />
           </div>
           <div className="hidden md:block">
             <Theme />
@@ -48,7 +54,7 @@ const Navbar = () => {
         </div>
       </nav>
     </header>
-  );
-};
+  )
+}
 
-export default Navbar;
+export default Navbar

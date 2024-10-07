@@ -60,6 +60,7 @@ module.exports = {
       },
       fontFamily: {
         inter: ["var(--font-inter)"],
+        m_plus_2: ["var(--font-m_plus_2)"],
       },
       boxShadow: {},
       backgroundImage: {},
@@ -95,4 +96,4 @@ module.exports = {
     },
   },
   plugins: [require("tailwindcss-animate"), require("@tailwindcss/typography")],
-};
+}

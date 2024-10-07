@@ -1,36 +1,36 @@
-"use client";
-import NextTopLoader from "nextjs-toploader";
+"use client"
+import NextTopLoader from "nextjs-toploader"
 import React, {
   createContext,
   useEffect,
   useState,
   useCallback,
   useContext,
-} from "react";
+} from "react"
 
 interface ThemeContextType {
-  mode: string;
-  setMode: (mode: string) => void;
+  mode: string
+  setMode: (mode: string) => void
 }
 interface Props {
-  children: React.ReactNode;
+  children: React.ReactNode
 }
-const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
+const ThemeContext = createContext<ThemeContextType | undefined>(undefined)
 
 export function ThemeProvider({ children }: Props) {
-  const [mode, setMode] = useState<string>();
+  const [mode, setMode] = useState<string>("light")
   const handleChangeTheme = useCallback(() => {
     if (localStorage.theme === "light" && localStorage.theme) {
-      setMode("light");
-      document.documentElement.classList.remove("dark");
+      setMode("light")
+      document.documentElement.classList.remove("dark")
     } else {
-      setMode("dark");
-      document.documentElement.classList.add("dark");
+      setMode("dark")
+      document.documentElement.classList.add("dark")
     }
-  }, []);
+  }, [])
   useEffect(() => {
-    handleChangeTheme();
-  }, [mode, handleChangeTheme]);
+    handleChangeTheme()
+  }, [mode, handleChangeTheme])
 
   if (!mode) {
     return (
@@ -45,21 +45,21 @@ export function ThemeProvider({ children }: Props) {
         speed={200}
         shadow="0 0 8px #2299DD,0 0 3px #2299DD"
       />
-    );
+    )
   }
   return (
     <ThemeContext.Provider value={{ mode, setMode }}>
       {children}
     </ThemeContext.Provider>
-  );
+  )
 }
 export function useTheme() {
-  const context = useContext(ThemeContext);
+  const context = useContext(ThemeContext)
 
   if (context === undefined) {
-    throw new Error("useTheme must be used within a ThemeProvider");
+    throw new Error("useTheme must be used within a ThemeProvider")
   }
-  return context;
+  return context
 }
 
-export default ThemeProvider;
+export default ThemeProvider
